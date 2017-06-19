@@ -11,9 +11,16 @@
 4. How can we clearly show the results without running into biases or group think?
 
 # Developer:
-
+1. As the developer, I want to display the rules and process of the analysis to the focus group clearly.
+2. I want to limit the amount of click opportunities to 25 and make sure that the images shown do not repeat in the same line-up.
+3. I want the UI to be easy to interact with and I want the results to be shown clearly after the analysis has been completed.
+4. I want to provide the focus group with an opportunity to rate on a scale their level of satisfaction with the products available.(stretch)
 
 # Focus Group:
-
+1. Are the instructions clear?
+2. How many times am I able to choose?
+3. Can I select more than one product during a turn?
+4. What were my top selections?
+5. How do my selections compare to others?
 
 # Technical Plan Approach:
