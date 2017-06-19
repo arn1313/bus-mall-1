@@ -24,3 +24,10 @@
 5. How do my selections compare to others?
 
 # Technical Plan Approach:
+1. Understanding the user_stories and parameters of the assignment.
+2. Scaffolding: setting up and linking up the HTML, CSS, and JS.
+3. Wireframing: creating the basic outline for the user friendly layout.
+4. Pseudo-coding: thinking through the process & breaking it down step by step.
+5. Hashing out the code: make it work....
+6. Debugging: ... then make it pretty.
+7. Finalize any additional CSS or JS.
