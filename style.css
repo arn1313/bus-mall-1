@@ -1,5 +1,114 @@
+body {
+  background-image: url('img/metro.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 header {
+  border: 5px outset #888;
+  border-radius: 5px;
+  background: rgba(1, 36, 23, .95);
   width: 960px;
   height: 200px;
-  background: #777;
+  margin: 0 auto;
+}
+
+Header h1 {
+  color: black;
+  margin: 0 auto;
+  display: inline;
+  margin-left: 1em;
+  font-family: 'Frijole', cursive;
+  font-size: 7.5em;
+}
+
+section {
+  width: 960px;
+  margin: 0 auto;
+}
+
+section img {
+  margin: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+section button {
+  background: goldenrod;
+  margin-bottom: 400px;
+  width: 200px;
+  border: 3px solid black;
+  border-radius: 3px;
+}
+
+section button label {
+  background: goldenrod;
+  color: rgb(1, 36, 23);
+  padding: 0;
+  margin: 0 auto;
+  width: 200px;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: .1em;
+}
+
+section button:hover, section button label:hover {
+  background: purple;
+  duration: 600ms;
+}
+
+form h2 {
+  color: goldenrod;
+  -webkit-text-stroke: .5px purple;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: .1em;
+  display: block;
+  margin-left: 1em;
+}
+
+form {
+  border: 5px outset #888;
+  border-radius: 5px;
+  width: 960px;
+  background: #111;
+  opacity: .95;
+  margin: 20px auto;
+}
+
+form fieldset {
+  border-style: none;
+}
+
+form p {
+  color: goldenrod;
+  -webkit-text-stroke: .5px purple;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: .1em;
+}
+
+form label {
+  display: inline;
+  color: goldenrod;
+  -webkit-text-stroke: .5px purple;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: .1em;
+}
+
+form input {
+  display: inline-block;
+  cursor: pointer;
+}
+
+footer {
+  border: 5px outset #888;
+  border-radius: 5px;
+  background: rgba(1, 36, 23, .95);
+  width: 960px;
+  height: 100px;
+  margin: 20px auto;
 }
