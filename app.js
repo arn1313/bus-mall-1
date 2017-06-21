@@ -4,6 +4,7 @@ var totalclicks = 0;
 var all = [];
 var newRoll = [];
 var lastRoll = [];
+var viewList = document.getElementById('list');
 var imgRoll = document.getElementById('rollCall');
 
 function Product(name, path){
@@ -20,7 +21,7 @@ function getRoll(){
     var randomSelection = Math.floor(Math.random() * all.length);
     if (!newRoll.includes(all[randomSelection]) && !lastRoll.includes(all[randomSelection])) {
       newRoll.push(all[randomSelection]);
-      console.log('Doplicate! Rerolling');
+      console.log('Duplicate! Rerolling');
       all[randomSelection].views++;
     }
   }
@@ -69,6 +70,7 @@ function clear(){
 
 function handleClick(event) {
   for(var i = 0; i < newRoll.length; i++) {
+    localStorage.setItem('data', JSON.stringify(all));
     if(newRoll[i].name === event.target.id) {
       newRoll[i].clicks ++;
     }
@@ -79,7 +81,6 @@ function handleClick(event) {
     imgRoll.removeEventListener('click', handleClick);
     clear();
     resultsButton();
-
   } else {
     clear();
     getRoll();
@@ -93,40 +94,62 @@ function resultsButton() {
   labEl.textContent = 'See Results';
   butEl.appendChild(labEl);
   imgRoll.appendChild(butEl);
+  renderList();
 }
 
-function renderChart() {
-  var chartLabel = [];
-  var chartData = [];
-  for (var i = 0; i < all.length; i ++){
-    chartData.push(all[i].clicks);
-    chartLabel.push(all[i].name);
+function renderList() {
+  var imgList = document.getElementById('list');
+  function showList() {
+    imgList.innerHtml = '';
+    for(var i = 0; i < all.length; i++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = 'Products: ' + all[i].name + ' has been clicked ' + all[i].clicks + ' times.';
+      imgList.appendChild(liEl);
+    }
   }
-
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-
-    // The data for our dataset
-    data: {
-      labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors','shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
-      datasets: [{
-        label: 'Results Chart',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-      }]
-    },
-
-    // Configuration options go here
-    options: {}
-  });
+  showList();
 }
 
+var research = function() {
+  if (localStorage.data){
+    all = JSON.parse(localStorage.data);
+  } else {
+    getRoll();
+  }
+};
+
+// research();
+// function renderChart() {
+//   var chartLabel = [];
+//   var chartData = [];
+//   for (var i = 0; i < all.length; i ++){
+//     chartData.push(all[i].clicks);
+//     chartLabel.push(all[i].name);
+//   }
+//
+// var ctx = document.getElementById('myChart').getContext('2d');
+// var chart = new Chart(ctx, {
+//   // The type of chart we want to create
+//   type: 'bar',
+//
+//   // The data for our dataset
+//   data: {
+//     labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors','shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
+//     datasets: [{
+//       label: 'Results Chart',
+//       backgroundColor: 'rgb(255, 99, 132)',
+//       borderColor: 'rgb(255, 99, 132)',
+//       data: [0, 10, 5, 2, 20, 30, 45],
+//     }]
+//   },
+//
+//   // Configuration options go here
+//   options: {}
+// });
+// }
 
 render();
 
-renderChart();
-
+// renderChart();
+viewList.addEventListener('click', renderList);
 imgRoll.addEventListener('click', handleClick);
