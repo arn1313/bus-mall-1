@@ -4,7 +4,7 @@ var totalclicks = 0;
 var all = [];
 var newRoll = [];
 var lastRoll = [];
-Product.imgRoll = document.getElementById('rollCall');
+var imgRoll = document.getElementById('rollCall');
 
 function Product(name, path){
   this.name = name;
@@ -26,6 +26,7 @@ function getRoll(){
   }
   lastRoll = newRoll;
 }
+
 new Product('bag', 'img/bag.jpg');
 new Product('banana', 'img/banana.jpg');
 new Product('bathroom', 'img/bathroom.jpg');
@@ -40,11 +41,84 @@ new Product('pen', 'img/pen.jpg');
 new Product('pet-sweep', 'img/pet-sweep.jpg');
 new Product('scissors', 'img/scissors.jpg');
 new Product('shark', 'img/shark.jpg');
-new Product('sweep', 'img/sweep.png');
+new Product('sweep', 'img/sweep.jpg');
 new Product('tauntaun', 'img/tauntaun.jpg');
 new Product('unicorn', 'img/unicorn.jpg');
-new Product('usb', 'img/usb.gif');
+new Product('usb', 'img/usb.jpg');
 new Product('water-can', 'img/water-can.jpg');
 new Product('wine-glass', 'img/wine-glass.jpg');
 
 getRoll();
+
+function render() {
+  for(var i = 0; i < newRoll.length; i++) {
+    var imgEl = document.createElement('img');
+    imgEl.src = newRoll[i].path;
+    console.log(imgEl);
+    imgEl.id = newRoll[i].name;
+    imgRoll.appendChild(imgEl);
+    newRoll[i].view ++;
+  }
+}
+
+function clear(){
+  while(imgRoll.firstChild) {
+    imgRoll.removeChild(imgRoll.firstChild);
+  }
+}
+
+function handleClick(event) {
+  for(var i = 0; i < newRoll.length; i++) {
+    if(newRoll[i].name === event.target.id) {
+      newRoll[i].clicks ++;
+    }
+  }
+
+  totalclicks ++;
+  if (totalclicks === 25) {
+    imgRoll.removeEventListener('click', handleClick);
+    clear();
+    resultsButton();
+
+  } else {
+    clear();
+    getRoll();
+    render();
+  }
+}
+
+function resultsButton() {
+  var butEl = document.createElement('button');
+  var labEl = document.createElement('labEl');
+  labEl.textContent = 'See Results';
+  butEl.appendChild(labEl);
+  imgRoll.appendChild(butEl);
+}
+
+function renderTable() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+      labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors','shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
+      datasets: [{
+        label: 'Results Chart',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45],
+      }]
+    },
+
+    // Configuration options go here
+    options: {}
+  });
+}
+
+render();
+
+// renderTable();
+
+imgRoll.addEventListener('click', handleClick);
