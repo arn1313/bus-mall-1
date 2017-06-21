@@ -95,7 +95,14 @@ function resultsButton() {
   imgRoll.appendChild(butEl);
 }
 
-function renderTable() {
+function renderChart() {
+  var chartLabel = [];
+  var chartData = [];
+  for (var i = 0; i < all.length; i ++){
+    chartData.push(all[i].clicks);
+    chartLabel.push(all[i].name);
+  }
+
   var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -117,8 +124,9 @@ function renderTable() {
   });
 }
 
+
 render();
 
-// renderTable();
+renderChart();
 
 imgRoll.addEventListener('click', handleClick);
